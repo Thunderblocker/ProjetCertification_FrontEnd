@@ -9,10 +9,17 @@ import {ApiChannel} from "./api.channel";
 export class ChannelsService {
 
   channelList!: Channel[];
+  currentChannel!: Channel;
 
   constructor(private apiChannel: ApiChannel) {
+    //Initialize the channel list
     this.apiChannel.getAllChannels().subscribe((data:Channel[]) => {
       this.channelList = data;
+    });
+
+    //Set currentChannel to the first channel
+    this.apiChannel.getChannelById(1).subscribe((data:Channel) => {
+      this.currentChannel = data;
     });
 
   }
@@ -31,13 +38,10 @@ export class ChannelsService {
     return this.apiChannel.postNewChannel(channel);
   }
 
-
-
-
-
-
-
-
+  // Get current channel
+  getCurrentChannel(): Channel {
+    return this.currentChannel;
+  }
 
 
 

@@ -18,6 +18,11 @@ export class ApiChannel {
     return this.http.get<Channel[]>('http://localhost:8080/channels');
   }
 
+  //GET CHANNEL BY ID
+  getChannelById(id:number):Observable<Channel> {
+    return this.http.get<Channel>(`http://localhost:8080/channels/${id}`);
+  }
+
   //EDIT  CHANNEL
   updateChannel( channel: Channel):Subscription  {
     // console.log ('id = '+ channel.id);
