@@ -5,6 +5,7 @@ import { MessagesService } from '../../service/messages.service';
 import { Message } from '../../model/message.model';
 import { MessagesListComponent } from '../messages-list/messages-list.component';
 import { ChannelsService } from '../../service/channelsService';
+import { Channel } from '../../model/Channel';
 
 @Component({
   selector: 'app-messages',
@@ -23,14 +24,15 @@ export class MessagesComponent implements OnInit{
     date: new Date()
   };
 
-  
+  currentChannel!: Channel;
 
   constructor(public messagesService: MessagesService, public channelService: ChannelsService) {
     
   }
   
   ngOnInit(): void {
-    this.channelService.getCurrentChannel();
+    //this.channelService.getCurrentChannel();
+    this.currentChannel = this.channelService.getCurrentChannel();
   }
 
   //ajouter un nouveau message
