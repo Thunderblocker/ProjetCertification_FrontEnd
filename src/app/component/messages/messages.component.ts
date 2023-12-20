@@ -1,3 +1,4 @@
+import {NgForOf} from "@angular/common";
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -10,7 +11,12 @@ import { Channel } from '../../model/Channel';
 @Component({
   selector: 'app-messages',
   standalone: true,
-  imports: [CommonModule, FormsModule, MessagesListComponent],
+
+    imports: [
+        NgForOf,
+        CommonModule, 
+        FormsModule, 
+        MessagesListComponent],
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss'
 })
@@ -45,5 +51,6 @@ export class MessagesComponent implements OnInit{
         this.messagesService.loadMessagesList();
       });
     }
+
   }
 }

@@ -6,7 +6,7 @@ import {HeaderComponent} from "../header/header.component";
 import {FooterComponent} from "../footer/footer.component";
 import {ChannelsComponent} from "../channels/channels.component";
 import {MessagesComponent} from "../messages/messages.component";
-import {AlertComponent} from "../channels/alertEdit/alert.component";
+import {AlertComponent} from "../channels/alertError/alert.component";
 
 @Component({
   selector: 'app-page-accueil',
