@@ -1,61 +1,56 @@
-import {Injectable} from "@angular/core";
-import {Channel} from "../model/Channel";
-import {ApiChannel} from "./api.channel";
-
+import { Injectable } from "@angular/core";
+import { Channel } from "../model/Channel";
+import { ApiChannel } from "./api.channel";
+import { FetcherService } from "./fetcher.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChannelsService {
 
-  channelList!: Channel[];
+  channelList: Channel[] = [];
   currentChannel!: Channel;
 
-  constructor(private apiChannel: ApiChannel) {
-    //Initialize the channel list
+  constructor(private apiChannel: ApiChannel, private fetcherService: FetcherService) {
+    // Initialize the channel list
     this.loadChannelsList();
 
-    //Set currentChannel to the first channel
+    // Set currentChannel to the first channel
     this.loadFirstChannel();
 
+    console.log("Log from ChannelsService constructor");
   }
 
   loadChannelsList() {
-    this.apiChannel.getAllChannels().subscribe((data:Channel[]) => {
+    this.fetcherService.getAll<Channel>("channels").subscribe((data: Channel[]) => {
       this.channelList = data;
     });
-    
   }
+
   loadFirstChannel() {
-    if (this.channelList && this.channelList.length > 0) {
-      this.currentChannel = this.channelList[0];
-    } else {
-      // Use a default channel or handle the case where the list is empty
-      this.apiChannel.getChannelById(1).subscribe((data: Channel) => {
-        this.currentChannel = data;
-      });
-    }
+    this.fetcherService.getById<Channel>("channels",1).subscribe((data: Channel) => {
+      this.currentChannel = data;
+    });
+    console.log("Log from ChannelsService loadFirstChannel :", this.currentChannel);
   }
 
-  //EDIT CHANNEL
+  // EDIT CHANNEL
   editChannel(channel: Channel) {
-    return this.apiChannel.updateChannel(channel);
+    return this.fetcherService.put<Channel>("channels", channel);
   }
 
-  //DELETE CHANNEL
-  deleteChannel(id:number){
-    return this.apiChannel.deleteChannel(id);
+  // DELETE CHANNEL
+  deleteChannel(id: number) {
+    return this.fetcherService.delete<Channel>("channels", id);
   }
-  //POST CHANNEL
-  addNewChannel(channel:Channel){
-    return this.apiChannel.postNewChannel(channel);
+
+  // POST CHANNEL
+  addNewChannel(channel: Channel) {
+    return this.fetcherService.post<Channel>("channels", channel);
   }
 
   // Get current channel
   getCurrentChannel(): Channel {
     return this.currentChannel;
   }
-
-
-
 }

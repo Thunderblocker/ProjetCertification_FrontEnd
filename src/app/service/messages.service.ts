@@ -6,37 +6,36 @@ import { FetcherService } from './fetcher.service';
   providedIn: 'root'
 })
 export class MessagesService {
-  messagesList!: Message[];
-  sortedMessagesList!: Message[];
-  currentUserID!: number;
+  messagesList: Message[] = [];
+  sortedMessagesList: Message[] = [];
+  currentUserID: number | undefined;
 
-  constructor(private fetcher: FetcherService) { 
+  constructor(private fetcher: FetcherService) {
     this.loadMessagesList();
+    console.log("Log from MessagesService constructor");
   }
 
   loadMessagesList() {
     this.fetcher.getAll<Message>('messages').subscribe(messages => {
       this.messagesList = messages;
-
-      //this.sortedMessagesList = this.messagesList.sort((a, b) => a.date.getTime() - b.date.getTime());
+      console.log("Log from MessagesService loadMessagesList - Done");
     });
   }
 
-  //
-  getAllMessages(): Message[]{
+  // GET ALL MESSAGES
+  getAllMessages(): Message[] {
     return this.messagesList;
   }
 
-  //POST MESSAGE
-  addNewMessage(message:Message){
+  // POST MESSAGE
+  addNewMessage(message: Message) {
     return this.fetcher.post<Message>('messages', message);
   }
 
-  //SET CURRENT USER ID
-  setCurrentUserID(id:number){
-    if(id!){
-      this.currentUserID = 1;
+  // SET CURRENT USER ID
+  setCurrentUserID(id: number | undefined) {
+    if (id !== undefined) {
+      this.currentUserID = id;
     }
-    this.currentUserID = id;
   }
 }

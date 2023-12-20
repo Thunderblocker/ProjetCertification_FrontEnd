@@ -7,6 +7,7 @@ import {FooterComponent} from "../footer/footer.component";
 import {ChannelsComponent} from "../channels/channels.component";
 import {MessagesComponent} from "../messages/messages.component";
 import {AlertComponent} from "../channels/alertError/alert.component";
+import { UsersListComponent } from '../users-list/users-list.component';
 
 @Component({
   selector: 'app-page-accueil',
@@ -17,7 +18,8 @@ import {AlertComponent} from "../channels/alertError/alert.component";
     ChannelsComponent,
     MessagesComponent,
     FooterComponent,
-    AlertComponent
+    AlertComponent,
+    UsersListComponent
   ],
   templateUrl: './page-accueil.component.html',
   styleUrl: './page-accueil.component.scss'
