@@ -2,7 +2,12 @@
   <div class="row">
     <article class="container">
       <div class="card-header pb-0">
-        <h5 class="card-title">{{ currentChannel.nom}}</h5>
+        <h5 class="card-title">
+           <ng-container *ngIf="currentChannel; else loading">
+            {{ currentChannel.nom }}
+          </ng-container>
+          <ng-template #loading>Loading...</ng-template>
+        </h5>
       </div>
 
       <div class="panel panel-info">
