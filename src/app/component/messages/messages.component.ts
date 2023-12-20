@@ -1,26 +1,22 @@
-import {NgForOf} from "@angular/common";
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessagesService } from '../../service/messages.service';
 import { Message } from '../../model/message.model';
-import { MessagesListComponent } from '../messages-list/messages-list.component';
 import { ChannelsService } from '../../service/channelsService';
 import { Channel } from '../../model/Channel';
+import { UsersService } from '../../service/users.service';
+import { MessagesListComponent } from '../messages-list/messages-list.component';
+import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-messages',
   standalone: true,
-
-    imports: [
-        NgForOf,
-        CommonModule, 
-        FormsModule, 
-        MessagesListComponent],
+  imports: [CommonModule, FormsModule, MessagesComponent, MessagesListComponent],
   templateUrl: './messages.component.html',
-  styleUrl: './messages.component.scss'
+  styleUrls: ['./messages.component.scss']
 })
-export class MessagesComponent implements OnInit{
+export class MessagesComponent implements OnInit {
 
   newMessage: Message = {
     id: 0,
@@ -32,25 +28,27 @@ export class MessagesComponent implements OnInit{
 
   currentChannel!: Channel;
 
-  constructor(public messagesService: MessagesService, public channelService: ChannelsService) {
-    
+  constructor(public messagesService: MessagesService, public channelService: ChannelsService, public userService: UsersService, private cdRef : ChangeDetectorRef) {
+      this.channelService.loadChannelsList();
   }
-  
+
   ngOnInit(): void {
-    //this.channelService.getCurrentChannel();
+    this.channelService.loadChannelsList();
+    this.channelService.loadFirstChannel();
     this.currentChannel = this.channelService.getCurrentChannel();
   }
 
-  //ajouter un nouveau message
+  // Ajouter un nouveau message
   addMessageSubmit() {
     if (this.newMessage.contenu.trim() !== '') {
+      this.newMessage.idCanal = this.channelService.getCurrentChannel()?.id??1; 
+      
+      this.newMessage.idUtilisateur = this.userService.getCurrentUserId()??1; 
+      
       this.messagesService.addNewMessage(this.newMessage).subscribe(() => {
-        // Réinitialisez le message après l'envoi
         this.newMessage.contenu = '';
-        // Rechargez la liste des messages
         this.messagesService.loadMessagesList();
       });
     }
-
   }
 }
