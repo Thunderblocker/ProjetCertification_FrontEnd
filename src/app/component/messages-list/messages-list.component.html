@@ -1,0 +1,9 @@
+<div class="messages-list">
+    <div *ngFor="let message of this.messagesService.messagesList">
+        <span>{{message.id}}</span>
+        <span>{{message.contenu}}</span>
+        <span>{{message.date}}</span>
+        <span>{{message.idCanal}}</span>
+        <span>{{message.idUtilisateur}}</span>
+    </div>
+</div>
