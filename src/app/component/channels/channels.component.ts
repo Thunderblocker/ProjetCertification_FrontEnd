@@ -3,11 +3,12 @@ import {CommonModule} from "@angular/common";
 import {ChannelsService} from "../../service/channelsService";
 import {Channel} from "../../model/Channel";
 import {FormsModule} from "@angular/forms";
+import {AlertComponent} from "./alertEdit/alert.component";
 
 @Component({
   selector: 'app-channels',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, AlertComponent],
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.scss'
 })
@@ -18,6 +19,7 @@ export class ChannelsComponent {
   displayStyleEdit = "none";
   displayStyledelete = "none";
   displayStyleAdd = "none";
+  displayStyleAlertError = "none";
 
   //recuperer la valeur input modifier le canal
   inputChannel:Channel={
@@ -47,11 +49,13 @@ export class ChannelsComponent {
   // ***********  EDIT CHANNEL **************************//
   editChannel() {
     this.displayStyleEdit = "block";
+
   }
   closeEdit() {
     this.displayStyleEdit = "none";
 
   }
+
   editChannelSubmit(){
     let id =  this.idChannelActive;
     //initialiser id de channel selectionner
@@ -60,7 +64,8 @@ export class ChannelsComponent {
       nom:this.inputChannel.nom,
     }
     if(id ===0) {
-      alert(' le canal general ne peut pas etre modifier')  //TODO CUSTOM
+       this.closeEdit();
+       this.displayStyleAlertError="block";
     }else{
       this.channels.editChannel(this.inputChannel);
       this.closeEdit();
@@ -79,7 +84,8 @@ export class ChannelsComponent {
   deleteChannelSubmit(){
     let id = this.idChannelActive;
     if(id ===0) {
-      alert(' le canal general ne peut pas etre supprimer ') //TODO CUSTOM
+        this.closeDelete();
+        this.displayStyleAlertError="block";
     }else{
       this.channels.deleteChannel(id);
       this.closeDelete();

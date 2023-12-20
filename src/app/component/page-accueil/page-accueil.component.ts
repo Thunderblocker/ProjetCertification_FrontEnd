@@ -6,6 +6,7 @@ import {HeaderComponent} from "../header/header.component";
 import {FooterComponent} from "../footer/footer.component";
 import {ChannelsComponent} from "../channels/channels.component";
 import {MessagesComponent} from "../messages/messages.component";
+import {AlertComponent} from "../channels/alertEdit/alert.component";
 
 @Component({
   selector: 'app-page-accueil',
@@ -15,7 +16,8 @@ import {MessagesComponent} from "../messages/messages.component";
     HeaderComponent,
     ChannelsComponent,
     MessagesComponent,
-    FooterComponent
+    FooterComponent,
+    AlertComponent
   ],
   templateUrl: './page-accueil.component.html',
   styleUrl: './page-accueil.component.scss'
