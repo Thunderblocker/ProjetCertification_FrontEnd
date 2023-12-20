@@ -17,6 +17,22 @@ export class ChannelsService {
 
   }
 
+  //EDIT CHANNEL
+  editChannel(channel: Channel) {
+    return this.apiChannel.updateChannel(channel);
+  }
+
+  //DELETE CHANNEL
+  deleteChannel(id:number){
+    return this.apiChannel.deleteChannel(id);
+  }
+  //POST CHANNEL
+  addNewChannel(channel:Channel){
+    return this.apiChannel.postNewChannel(channel);
+  }
+
+
+
 
 
 
