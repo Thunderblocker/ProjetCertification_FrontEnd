@@ -20,7 +20,14 @@ export class MessagesService {
       //this.sortedMessagesList = this.messagesList.sort((a, b) => a.date.getTime() - b.date.getTime());
     });
   }
+
+  //
   getAllMessages(): Message[]{
     return this.messagesList;
+  }
+
+  //POST MESSAGE
+  addNewMessage(message:Message){
+    return this.fetcher.post<Message>('messages', message);
   }
 }
