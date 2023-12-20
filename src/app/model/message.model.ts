@@ -4,4 +4,6 @@ export interface Message{
     idUtilisateur: number;
     idCanal: number;
     date: Date;
+
+    
 }
