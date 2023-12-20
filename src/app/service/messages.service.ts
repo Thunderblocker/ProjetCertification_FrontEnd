@@ -8,6 +8,7 @@ import { FetcherService } from './fetcher.service';
 export class MessagesService {
   messagesList!: Message[];
   sortedMessagesList!: Message[];
+  currentUserID!: number;
 
   constructor(private fetcher: FetcherService) { 
     this.loadMessagesList();
@@ -29,5 +30,13 @@ export class MessagesService {
   //POST MESSAGE
   addNewMessage(message:Message){
     return this.fetcher.post<Message>('messages', message);
+  }
+
+  //SET CURRENT USER ID
+  setCurrentUserID(id:number){
+    if(id!){
+      this.currentUserID = 1;
+    }
+    this.currentUserID = id;
   }
 }
