@@ -1,3 +1,6 @@
+<div [ngStyle]="{'display':displayStyleAlertError}">
+  <app-alert></app-alert>
+</div>
 <div class="col-sm-3">
     <div class="card">
         <div class="card-header p-b-5">
@@ -63,9 +66,7 @@
       </div>
       <div class="modal-body">
         <article class="l-design-widht">
-          <div class="card">
             <p style="text-align: center; color: crimson;">Êtes-vous certain de supprimer le canal ? </p>
-          </div>
         </article>
       </div>
       <div class="modal-footer  button-group">
@@ -96,7 +97,7 @@
         <form >
           <div>
             <label for="nameAddCanal" class="m-3">
-              Nom ?:
+              Nom :
             </label>
             <input id="nameAddCanal" type="text" name="nom"  [(ngModel)]="inputAddChannel.nom">
           </div>
@@ -143,8 +144,8 @@
       <div class="modal-body">
         <form >
           <div>
-            <label for="nameEdit">
-              Nouveau nom ?:
+            <label for="nameEdit" class="m-3">
+              Nouveau nom :
             </label>
             <input id="nameEdit" type="text" name="nom"  [(ngModel)]="inputChannel.nom">
           </div>
