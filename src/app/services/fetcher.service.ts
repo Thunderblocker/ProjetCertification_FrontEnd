@@ -6,12 +6,12 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class FetcherService {
-  private apiUrl = 'http://localhost:8080/api';
+  private apiUrl = 'http://localhost:8080/';
 
   constructor(private http: HttpClient) { }
 
   getAll<T>(item: string): Observable<T[]>{
-    return this.http.get<T[]>(`${this.apiUrl}/${item}`);
+    return this.http.get<T[]>(`${this.apiUrl}${item}`);
   }  
   
   getById<T>(item: string, id: number): Observable<T>{
