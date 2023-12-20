@@ -13,15 +13,28 @@ export class ChannelsService {
 
   constructor(private apiChannel: ApiChannel) {
     //Initialize the channel list
+    this.loadChannelsList();
+
+    //Set currentChannel to the first channel
+    this.loadFirstChannel();
+
+  }
+
+  loadChannelsList() {
     this.apiChannel.getAllChannels().subscribe((data:Channel[]) => {
       this.channelList = data;
     });
-
-    //Set currentChannel to the first channel
-    this.apiChannel.getChannelById(1).subscribe((data:Channel) => {
-      this.currentChannel = data;
-    });
-
+    
+  }
+  loadFirstChannel() {
+    if (this.channelList && this.channelList.length > 0) {
+      this.currentChannel = this.channelList[0];
+    } else {
+      // Use a default channel or handle the case where the list is empty
+      this.apiChannel.getChannelById(1).subscribe((data: Channel) => {
+        this.currentChannel = data;
+      });
+    }
   }
 
   //EDIT CHANNEL

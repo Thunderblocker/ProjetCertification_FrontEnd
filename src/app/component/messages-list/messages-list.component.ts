@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { MessagesService } from '../../service/messages.service';
 
 @Component({
@@ -9,11 +9,13 @@ import { MessagesService } from '../../service/messages.service';
   templateUrl: './messages-list.component.html',
   styleUrl: './messages-list.component.scss'
 })
-export class MessagesListComponent {
+export class MessagesListComponent  {
   currentUserID: number;
 
   constructor(public messagesService: MessagesService, public datePipe: DatePipe) {
     this.currentUserID = 123;
-   }
+  }
+
+  
 
 }

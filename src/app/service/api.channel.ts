@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {Observable, Subscription} from "rxjs";
 import {Channel} from "../model/Channel";
 
@@ -7,11 +7,13 @@ import {Channel} from "../model/Channel";
 @Injectable({
   providedIn: 'root',
 })
-export class ApiChannel {
+export class ApiChannel implements OnInit {
   constructor(private http: HttpClient) {
   }
 
-
+  ngOnInit(): void {
+      this.getAllChannels();
+  }
 
  //GET ALL  CHANNELS
   getAllChannels():Observable<Channel[]> {
