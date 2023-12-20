@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Message } from '../models/message.model';
+import { Message } from '../model/message.model';
 import { FetcherService } from './fetcher.service';
 
 @Injectable({
