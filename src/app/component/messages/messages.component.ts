@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessagesService } from '../../service/messages.service';
 import { Message } from '../../model/message.model';
 import { MessagesListComponent } from '../messages-list/messages-list.component';
+import { ChannelsService } from '../../service/channelsService';
+import { Channel } from '../../model/Channel';
 
 @Component({
   selector: 'app-messages',
@@ -12,7 +14,7 @@ import { MessagesListComponent } from '../messages-list/messages-list.component'
   templateUrl: './messages.component.html',
   styleUrl: './messages.component.scss'
 })
-export class MessagesComponent {
+export class MessagesComponent implements OnInit{
 
   newMessage: Message = {
     id: 0,
@@ -22,7 +24,15 @@ export class MessagesComponent {
     date: new Date()
   };
 
-  constructor(public messagesService: MessagesService) {
+  currentChannel!: Channel;
+
+  constructor(public messagesService: MessagesService, public channelService: ChannelsService) {
+    
+  }
+  
+  ngOnInit(): void {
+    //this.channelService.getCurrentChannel();
+    this.currentChannel = this.channelService.getCurrentChannel();
   }
 
   //ajouter un nouveau message

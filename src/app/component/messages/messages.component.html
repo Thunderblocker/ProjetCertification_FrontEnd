@@ -2,11 +2,11 @@
   <div class="row">
     <article class="container">
       <div class="card-header pb-0">
-        <h5 class="card-title">Messages => Alex</h5>
+        <h5 class="card-title">{{ currentChannel.nom}}</h5>
       </div>
 
       <div class="panel panel-info">
-        <div class="panel-heading">Panel Head</div>
+        <div class="panel-heading m-3 ">Fil de conversation</div>
         <div class="panel-body">
           <app-messages-list></app-messages-list>
         </div>
@@ -19,7 +19,7 @@
       <div class="text-box">
         <label for="messageContent" class="m-3">Message :</label>
         <input id="messageContent" type="text" name="contenu" [(ngModel)]="this.newMessage.contenu">
-        <button class="btn btn-primary" type="submit">Ajouter</button>
+        <button class="btn btn-primary m-3" type="submit">Ajouter</button>
       </div>
     </form>
   </div>

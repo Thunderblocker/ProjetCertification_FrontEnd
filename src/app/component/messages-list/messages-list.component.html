@@ -1,9 +1,10 @@
 <div class="messages-list">
-    <div *ngFor="let message of this.messagesService.messagesList">
-        <span>{{message.id}}</span>
-        <span>{{message.contenu}}</span>
-        <span>{{message.date}}</span>
-        <span>{{message.idCanal}}</span>
-        <span>{{message.idUtilisateur}}</span>
+    <div *ngFor="let message of this.messagesService.messagesList" class="card mb-2" [ngClass]="{'align-right': message.id !== currentUserID, 'align-left': message.id === currentUserID}" class="card mb-3">
+        <span data-toggle="tooltip" data-placement="top" title="ID: {{message.id}}">
+            <p class="card-text m-3">{{message.contenu}}</p>
+            <p class="card-text m-3"><small class="text-muted">{{datePipe.transform(message.date, 'HH:mm dd-MM-yyyy')}}</small></p>
+            <span>{{message.idCanal}}</span>
+            <span>{{message.idUtilisateur}}</span>
+        </span>
     </div>
 </div>
