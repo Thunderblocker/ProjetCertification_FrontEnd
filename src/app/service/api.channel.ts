@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {Observable, Subscription} from "rxjs";
-import {Channel} from "../models/Channel";
+import {Channel} from "../model/Channel";
 
 
 @Injectable({

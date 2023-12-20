@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Channel} from "../models/Channel";
+import {Channel} from "../model/Channel";
 import {ApiChannel} from "./api.channel";
 
 

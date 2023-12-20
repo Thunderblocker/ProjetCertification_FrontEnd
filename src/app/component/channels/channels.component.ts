@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {ChannelsService} from "../../services/channelsService";
-import {Channel} from "../../models/Channel";
+import {ChannelsService} from "../../service/channelsService";
+import {Channel} from "../../model/Channel";
 import {FormsModule} from "@angular/forms";
 
 @Component({
