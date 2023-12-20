@@ -4,11 +4,49 @@
 <div class="col-sm-3">
     <div class="card">
         <div class="card-header p-b-5">
-            <h5 class="card-title text-center"><i class="fa fa-random" aria-hidden="true"></i>Canaux</h5>
+            <h5 class="card-title text-center"><i class="fa fa-random m-1" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="#E7B10A" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+
+            </i>Canaux</h5>
         </div>
-        <div class="list-group list-group-flush" *ngFor="let item of this.channels.channelList">
-            <a class="list-group-item list-group-item-action"  [class.active]= "item.id === selectedItem" (click)="setActiveClass(item.id)">{{item.nom|uppercase}} </a>
-        </div>
+
+
+      <div *ngFor="let item of this.channels.channelList">
+        <details open>
+          <summary>
+            {{item.nom|uppercase}}
+          </summary>
+          <div *ngFor="let i of this.channels.channelList">
+              {{i.nom}}
+
+          </div>
+        </details>
+
+
+
+      </div>
+
+
+
+
+
+
+
+
+
+      <!--        <div class="list-group list-group-flush" *ngFor="let item of this.channels.channelList">-->
+<!--            <a class="list-group-item list-group-item-action"  [class.active]= "item.id === selectedItem" (click)="setActiveClass(item.id)">{{item.nom|uppercase}}-->
+<!--              -->
+<!--              <div class="list-group list-group-flush" *ngFor="let i of this.listeMessages">-->
+<!--                <a class="list-group-item list-group-item-action"  [class.active]= "i.id === selectedItem" (click)="setActiveClass(i.id)">{{i.contenu}} </a>-->
+
+<!--              </div>-->
+
+<!--            </a>-->
+<!--        </div>-->
     </div>
     <div class="card">
       <div class="one"></div>
@@ -54,14 +92,12 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content container-fluid">
       <div class="modal-header">
-        <h4 class="modal-title text-center">
-          <i class="fa fa-random" aria-hidden="true"></i>
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="25" viewBox="0 0 640 512">
-            <path
-              fill="#E5D283"
-              d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM472 200H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H472c-13.3 0-24-10.7-24-24s10.7-24 24-24z"
-            />
-          </svg> Supprimer le canal </h4>
+          <i class="fa fa-random" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+               fill="none" stroke="#E7B10A" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+            </i> Supprimer le canal </h4>
 
       </div>
       <div class="modal-body">
@@ -91,7 +127,16 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content container-fluid">
       <div class="modal-header">
+
         <h4 class="modal-title text-center">  Ajouter un canal </h4>
+           <i class="fa fa-random" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+               fill="none" stroke="#E7B10A" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+            </i>
+          Ajouter un canal </h4>
+
       </div>
       <div class="modal-body">
         <form >
@@ -132,13 +177,12 @@
     <div class="modal-content container-fluid">
       <div class="modal-header">
         <h4 class="modal-title text-center">
-          <i class="fa fa-random" aria-hidden="true"></i>
-          <svg xmlns="http://www.w3.org/2000/svg" height="20" width="25" viewBox="0 0 640 512">
-            <path
-              fill="#E5D283"
-              d="M96 128a128 128 0 1 1 256 0A128 128 0 1 1 96 128zM0 482.3C0 383.8 79.8 304 178.3 304h91.4C368.2 304 448 383.8 448 482.3c0 16.4-13.3 29.7-29.7 29.7H29.7C13.3 512 0 498.7 0 482.3zM472 200H616c13.3 0 24 10.7 24 24s-10.7 24-24 24H472c-13.3 0-24-10.7-24-24s10.7-24 24-24z"
-            />
-          </svg> Modifier le canal </h4>
+          <i class="fa fa-random" aria-hidden="true">
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+               fill="none" stroke="#E7B10A" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+          </svg>
+            </i> Modifier le canal </h4>
 
       </div>
       <div class="modal-body">

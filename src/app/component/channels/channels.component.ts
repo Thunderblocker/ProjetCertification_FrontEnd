@@ -3,7 +3,10 @@ import {CommonModule} from "@angular/common";
 import {ChannelsService} from "../../service/channelsService";
 import {Channel} from "../../model/Channel";
 import {FormsModule} from "@angular/forms";
-import {AlertComponent} from "./alertEdit/alert.component";
+import {AlertComponent} from "./alertError/alert.component";
+import {MessagesService} from "../../service/messages.service";
+import {Message} from "../../model/message.model";
+import {UsersService} from "../../service/users.service";
 
 @Component({
   selector: 'app-channels',
@@ -15,6 +18,8 @@ import {AlertComponent} from "./alertEdit/alert.component";
 export class ChannelsComponent {
 
   listeChannels!:Channel[];
+  listeMessages!:Message[];
+
   idChannelActive = 0;
   displayStyleEdit = "none";
   displayStyledelete = "none";
@@ -34,8 +39,9 @@ export class ChannelsComponent {
 
 
 
-  constructor( public channels:ChannelsService) {
+  constructor( public channels:ChannelsService,public messageList:MessagesService, public users:UsersService) {
     this.listeChannels= this.channels.channelList;
+    this.listeMessages = this.messageList.getAllMessages();
   }
 
   //Add class active element
@@ -111,6 +117,20 @@ export class ChannelsComponent {
       // appel la fonction refresh                       //TODO
 
   }
+
+
+  //******************  Afficher les details  channels / users ****************************//
+
+
+
+
+
+
+
+
+
+
+
 
 
 
