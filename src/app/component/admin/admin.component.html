@@ -1,0 +1,27 @@
+<app-head></app-head>
+<app-header></app-header>
+
+<div class="admin-container">
+    <h2>Administration</h2>
+  
+    <!-- Formulaire de création d'utilisateur -->
+    <div>
+      <h3>Créer un nouvel utilisateur</h3>
+      <!-- Ajoutez ici votre formulaire de création d'utilisateur -->
+    </div>
+  
+    <!-- Liste des utilisateurs -->
+    <div>
+      <h3>Liste des utilisateurs</h3>
+      <app-users-list></app-users-list>
+      <div *ngFor="let user of this.userService.usersList">
+        <div class="card-boddy">
+            <span>{{user.pseudo}}</span>
+            <span>{{user.prenom}}</span>
+            <span>{{user.nom}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<app-footer></app-footer>
