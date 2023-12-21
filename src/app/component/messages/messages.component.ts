@@ -7,7 +7,6 @@ import { ChannelsService } from '../../service/channels.service';
 import { Channel } from '../../model/Channel';
 import { UsersService } from '../../service/users.service';
 import { MessagesListComponent } from '../messages-list/messages-list.component';
-import { catchError } from 'rxjs';
 
 @Component({
   selector: 'app-messages',

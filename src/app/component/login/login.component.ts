@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, inject } from '@angular/core';
 import { AuthService } from '../../service/auth.service';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { UsersService } from '../../service/users.service';
 import { Router } from '@angular/router';
 import { UserCredentials } from '../../model/userCredentials.model';
@@ -22,9 +22,10 @@ export class LoginComponent {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = fb.group({
-      username: '',
-      password: ''
+      username: ['', Validators.required],
+      password: ['', Validators.required]
     });
+
     this.userCredentials = {
       username: '',
       password: ''
@@ -35,18 +36,16 @@ export class LoginComponent {
     this.userCredentials.username = this.loginForm.get('username')?.value;
     this.userCredentials.password = this.loginForm.get('password')?.value;
 
-      this.authService.login(this.userCredentials).subscribe(
-        (data: any) => {
-          if (data) {
-            localStorage.setItem("user", JSON.stringify(data));
-            this.loggedIn = true;
-            this.router.navigateByUrl('/home');
-          }
-        },
-        (error: any) => {
-          this.loginError = true;
-          console.error('Error login', error);
-        }
-      );
+    this.authService.login(this.userCredentials).subscribe(
+      data => {
+        this.loggedIn = true;
+        this.loginError = false;
+        this.router.navigate(['/home']);
+      },
+      error => {
+        this.loginError = true;
+      }
+    );
+
     }
   }
