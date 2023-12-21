@@ -73,4 +73,16 @@ export class UsersService implements OnInit {
   deleteUser(id: number): Observable<User> {
     return this.fetcher.delete<User>('users', id);
   }
+
+
+  /* 
+    - LOGIN  -------------------------------------------
+  */
+  loginOLD(user: User): Observable<User> {
+    return this.fetcher.post<User>('login', user);
+  }
+
+  login(userCredentials : any): Observable<any> {
+    return this.fetcher.post<any>('login', userCredentials);
+ }
 }

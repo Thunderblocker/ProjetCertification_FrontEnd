@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { UserCredentials } from '../model/userCredentials.model';
 
 @Injectable({
   providedIn: 'root'
@@ -43,5 +44,10 @@ export class FetcherService {
   //DELETE ITEM
   delete<T>(item: string, id: number): Observable<T> {
     return this.http.delete<T>(`${this.apiUrl}${item}/${id}`);
+  }
+
+  //LOGIN
+  login(userCredentials: UserCredentials): Observable<UserCredentials> {
+    return this.http.post<UserCredentials>(`${this.apiUrl}login`, userCredentials);
   }
 }

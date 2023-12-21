@@ -1,0 +1,14 @@
+<div *ngIf="loginError" class="error-message">incorrect</div>
+<div *ngIf="loggedIn" class="">connexion ok</div>
+
+<form (submit)="onSubmit()" [formGroup]="loginForm">
+  <label for="username">Username:</label>
+  <input placeholder="Username" id="username" formControlName="username" required>
+
+  <label for="password">Password:</label>
+  <input placeholder="Password" type="password" id="password" formControlName="password" required>
+
+  <div>
+    <button type="submit">Login</button>
+  </div>
+</form>
