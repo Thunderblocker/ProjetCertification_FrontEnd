@@ -1,5 +1,5 @@
 .card-header{
-  background-color: #3876BF;
+  background-color: #62add6;
   color: #f3f3f3;
 }
 
@@ -7,27 +7,57 @@ a:hover {
   background-color: #A1CCD1;
 }
 .btnChannel{
-  background-color: #2FA4FF;
-  width: 110px;
+  background-color: #62add6;
+  width: 110px !important;
 }
 .btnChannel:hover{
   background-color: #FFC600;
 }
 
-button {
-  font-family: Arial, Helvetica;
-  font-size: 16px;
-  padding: 10px;
-  background: #2FA4FF;
-  color: #000000;
-  display: inline;
-  border: 0;
-  text-decoration: none;
-  line-height: 17px;
+//button {
+//  font-family: Arial, Helvetica;
+//  font-size: 16px;
+//  padding: 10px;
+//  background: #62add6;
+//  color: #000000;
+//  display: inline;
+//  border: 0;
+//  text-decoration: none;
+//  line-height: 17px;
+//}
+
+
+button{
+
+  cursor:pointer;
+  margin-top:20px;
+  float:right;
+  height:40px;
+  padding-left:0px;
+  padding-right:0px;
+  font-family:Arial, Helvetica, sans-serif;
+  font-weight:bold;
+  font-size:20px;
+  color:#FFF;
+  text-shadow: 0px -1px 0px #000000;
+  -webkit-border-radius:8px;
+  border-radius:8px;
+  border-top:1px solid #FFF;
+  -webkit-box-shadow: 0px 2px 14px #000;
+  box-shadow: 0px 2px 14px #000;
+  background-color: #62add6;
+  background-repeat:repeat-x;
 }
-
-
-
+#button:active {
+  zoom: 1;
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+}
+#button:focus {
+  zoom: 1;
+  filter: alpha(opacity=80);
+  opacity: 0.8;
+}
 
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
