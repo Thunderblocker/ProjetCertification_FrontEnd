@@ -33,9 +33,17 @@
   <div class="row">
     <form (ngSubmit)="addMessageSubmit()">
       <div class="text-box">
-        <label for="messageContent" class="m-3">Message :</label>
-        <input id="messageContent" type="text" name="contenu" [(ngModel)]="this.newMessage.contenu">
-        <button class="btn btn-primary m-3" type="submit">Ajouter</button>
+        <div id="wrapper">
+          <article id="paper">
+            <textarea placeholder="Tapez un message ..." id="messageContent" name="text" rows="4" style="overflow: hidden; word-wrap: break-word;
+             resize: none; height: 160px; " [(ngModel)]="this.newMessage.contenu"></textarea>
+               <input id="button" type="submit" value="Envoyer">
+            <br/>
+          </article>
+          </div>
+<!--        <label for="messageContent" class="m-3">Message :</label>-->
+<!--        <input id="messageContent" type="text" name="contenu" [(ngModel)]="this.newMessage.contenu">-->
+<!--        <button class="btn btn-primary m-3" type="submit">Ajouter</button>-->
       </div>
     </form>
   </div>
