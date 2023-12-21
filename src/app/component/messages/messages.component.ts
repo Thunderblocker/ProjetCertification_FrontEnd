@@ -7,12 +7,10 @@ import { MessagesService } from '../../service/messages.service';
 import { Message } from '../../model/message.model';
 import { ChannelsService } from '../../service/channels.service';
 import { Channel } from '../../model/Channel';
-
 import {ChannelsComponent} from "../channels/channels.component";
 import {User} from "../../model/User";
 import {UsersService} from "../../service/users.service";
 import {MessagesListComponent} from "../messages-list/messages-list.component";
-
 
 
 @Component({

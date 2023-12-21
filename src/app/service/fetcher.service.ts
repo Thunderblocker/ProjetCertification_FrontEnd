@@ -48,6 +48,8 @@ export class FetcherService {
 
   //LOGIN
   login(userCredentials: UserCredentials): Observable<UserCredentials> {
-    return this.http.post<UserCredentials>(`${this.apiUrl}login`, userCredentials);
+    const thing = this.http.post<UserCredentials>(`${this.apiUrl}login`, userCredentials);
+    console.log(thing);
+    return thing;
   }
 }
