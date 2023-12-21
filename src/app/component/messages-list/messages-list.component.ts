@@ -20,7 +20,7 @@ export class MessagesListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.currentUserID = this.userService.getCurrentUserId()!;
+    this.currentUserID = 1;
     console.log("log from messages list component onInit");
   }
 }

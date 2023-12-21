@@ -21,12 +21,12 @@ export class MessagesComponent implements OnInit {
   newMessage: Message = {
     id: 0,
     contenu: '',
-    idUtilisateur: 1, 
-    idCanal: 1, 
+    utilisateur: { id:100, pseudo:'defaut', prenom:'defaut', nom:'defaut', image:''}, 
+    canal: { id:1, nom:'general' },  
     date: new Date()
   };
 
-  currentChannel!: Channel;
+  currentChannel: Channel = {id:1, nom:"test2"};
 
   constructor(public messagesService: MessagesService, public channelService: ChannelsService, public userService: UsersService, private cdRef : ChangeDetectorRef) {
       this.channelService.loadChannelsList();
@@ -34,16 +34,20 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.channelService.loadChannelsList();
-    this.channelService.loadFirstChannel();
-    this.currentChannel = this.channelService.getCurrentChannel();
+    //this.channelService.loadFirstChannel();
+    this.channelService.getChannel(1).subscribe((data: Channel) => {
+      this.currentChannel = data;
+      //this.cdRef.detectChanges();
+    });
+    /* this.currentChannel = this.channelService.getCurrentChannel(); */
   }
 
   // Ajouter un nouveau message
   addMessageSubmit() {
     if (this.newMessage.contenu.trim() !== '') {
-      this.newMessage.idCanal = this.channelService.getCurrentChannel()?.id??1; 
+      this.newMessage.canal.id = this.channelService.getCurrentChannel()?.id??1; 
       
-      this.newMessage.idUtilisateur = this.userService.getCurrentUserId()??1; 
+      this.newMessage.utilisateur.id = this.userService.getCurrentUserId()??1; 
       
       this.messagesService.addNewMessage(this.newMessage).subscribe(() => {
         this.newMessage.contenu = '';
