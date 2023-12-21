@@ -26,16 +26,29 @@ export class ChannelsService {
   constructor(private  apiChannel: ApiChannel, private userslist:UsersService, private listeMessages:MessagesService) {
     this.listeMsgService = this.listeMessages.loadMessagesList()
     //Initialize the channel list
+    this.loadChannelsList();
+
+    //Set currentChannel to the first channel
+    this.loadFirstChannel();
+
+  }
+
+  loadChannelsList() {
     this.apiChannel.getAllChannels().subscribe((data:Channel[]) => {
       this.channelsList = data;
         this.filterNewUsersChannel(data,this.listeMsgService);
     });
 
-    //Set currentChannel to the first channel
-    this.apiChannel.getChannelById(1).subscribe((data:Channel) => {
-      this.currentChannel = data;
-    });
-
+  }
+  loadFirstChannel() {
+    if (this.channelsList && this.channelsList.length > 0) {
+      this.currentChannel = this.channelsList[0];
+    } else {
+      // Use a default channel or handle the case where the list is empty
+      this.apiChannel.getChannelById(1).subscribe((data: Channel) => {
+        this.currentChannel = data;
+      });
+    }
   }
 
   //GET ALL CHANNELS REFRESH
