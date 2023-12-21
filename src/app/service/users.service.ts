@@ -1,6 +1,7 @@
 import {Injectable} from "@angular/core";
 import {User} from "../model/User";
 import {ApiUsers} from "./api.users";
+import {Channel} from "../model/Channel";
 
 
 @Injectable({
@@ -16,6 +17,15 @@ export class UsersService {
     });
 
   }
+
+
+  //GET ALL USERS
+  getTousUtilisateurs() {
+    return this.apiUsers.getAllUsers().subscribe((data:User[]) => {
+      this.usersList = data;
+    });
+  }
+
 
 
 

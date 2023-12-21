@@ -40,12 +40,12 @@ button {
 	font-size: 16px;
 }
 
-body {
-	font-family: "Inter", sans-serif;
-	line-height: 1.5;
-	min-height: 100vh;
-	font-size: 1.25rem;
-}
+//body {
+//	font-family: "Inter", sans-serif;
+//	line-height: 1.5;
+//	min-height: 100vh;
+//	font-size: 1.25rem;
+//}
 
 *:focus {
 	outline: none;
@@ -65,6 +65,7 @@ details div {
 	border-right: 2px solid #3876BF;
 	border-bottom: 2px solid #3876BF;
 	padding: 1.5em;
+
 }
 
 details div > * + * {
@@ -99,7 +100,7 @@ summary:before {
 	content: "↓";
 	width: 1.75rem;
 	height: 1.75rem;
-	background-color: #000;
+	background-color: #2FA4FF;
 	color: #FFF;
 	display: inline-flex;
 	justify-content: center;
@@ -108,15 +109,16 @@ summary:before {
 }
 
 details[open] summary {
-	background-color: #eee;
+	background-color: #A1CCD1;
 }
 
 details[open] summary:before {
 	content: "↑";
+  color: #f3f3f3;
 }
 
 summary:hover {
-	background-color: #A1CCD1;
+	background-color: #FFC600;
 }
 
 a {
@@ -128,6 +130,7 @@ a {
 
 a:hover {
 	box-shadow: 0 3px 0 0;
+  color: #2FA4FF;
 
 }
 

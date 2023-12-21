@@ -25,8 +25,6 @@ export class ApiChannel {
 
   //EDIT  CHANNEL
   updateChannel( channel: Channel):Subscription  {
-    // console.log ('id = '+ channel.id);
-    // console.log ('nom channel  = '+ channel.nom);
     return this.http.put('http://localhost:8080/channels',channel).subscribe((res) => {
       console.log( res);
     });
@@ -49,6 +47,10 @@ export class ApiChannel {
 
   }
 
+  //GET  UPDATE LIST  CHANNELS
+  getAllUpdateChannel():Observable<Channel[]> {
+    return this.http.get<Channel[]>('http://localhost:8080/channels');
+  }
 
 
 

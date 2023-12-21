@@ -1,24 +1,33 @@
-import { Component } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {ChannelsService} from "../../service/channelsService";
 import {Channel} from "../../model/Channel";
 import {FormsModule} from "@angular/forms";
 import {AlertComponent} from "./alertError/alert.component";
-import {MessagesService} from "../../service/messages.service";
+
 import {Message} from "../../model/message.model";
 import {UsersService} from "../../service/users.service";
+import {MessagesComponent} from "../messages/messages.component";
+
+
 
 @Component({
   selector: 'app-channels',
   standalone: true,
-  imports: [CommonModule, FormsModule, AlertComponent],
+  imports: [CommonModule, FormsModule, AlertComponent,MessagesComponent],
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.scss'
 })
-export class ChannelsComponent {
 
-  listeChannels!:Channel[];
+export class ChannelsComponent  implements OnInit{
+
+
+   // listeChannels!:Channel[];
+
   listeMessages!:Message[];
+
+  @Input()
+  listeTousCanaux!:Channel[];
 
   idChannelActive = 0;
   displayStyleEdit = "none";
@@ -37,22 +46,49 @@ export class ChannelsComponent {
     nom:"",
   }
 
+  @Input() nomChannelActif!:string;
 
+  constructor( public channels:ChannelsService, public users:UsersService ) {
 
-  constructor( public channels:ChannelsService,public messageList:MessagesService, public users:UsersService) {
-    this.listeChannels= this.channels.channelList;
-    this.listeMessages = this.messageList.getAllMessages();
   }
+
+  ngOnInit(): void {
+    this.listeTousCanaux = this.channels.listeTousCanaux;
+
+  }
+
+
+  refrechPage() {
+     //this.router.navigate(["/home"]);
+     //this.router.navigateByUrl("/home");
+     window.location.reload();
+  }
+
+  // Rafraîchir data
+  refrechData(){
+    // this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
+    // this.router.navigate(['Your actualComponent']);
+    // });
+  }
+
 
   //Add class active element
   selectedItem = 0;
   setActiveClass(id:number){
     this.selectedItem = id;
     this.idChannelActive = id;
+    this.refrechData();
+    //filter channel par user
+    this.filterParChannelUser()
+    this.channels.getAllChannelsRefresh();
+
+     // if(this.listeChannels.length !=0){
+     //   this.listeChannels.forEach((element) => console.log("canal = "+element));
+     // }
   }
 
 
-  // ***********  EDIT CHANNEL **************************//
+  //    EDIT CHANNEL  //
   editChannel() {
     this.displayStyleEdit = "block";
 
@@ -75,12 +111,14 @@ export class ChannelsComponent {
     }else{
       this.channels.editChannel(this.inputChannel);
       this.closeEdit();
-      // appel la fonction refresh                       //TODO
+      // appel la fonction refresh                     //TODO
+     // this.refrechPage();
+
     }
   }
 
 
-  // ***********  DELETE CHANNEL **************************//
+  //    DELETE CHANNEL //
   deleteChannel(){
     this.displayStyledelete = "block";
   }
@@ -96,10 +134,11 @@ export class ChannelsComponent {
       this.channels.deleteChannel(id);
       this.closeDelete();
       // appel la fonction refresh                       //TODO
+     // this.refrechPage();
     }
   }
 
-    // ***********  ADD NEW  CHANNEL **************************//
+    //  ADD NEW  CHANNEL  //
 
   addChannel(){
     this.displayStyleAdd = "block";
@@ -115,13 +154,20 @@ export class ChannelsComponent {
     this.channels.addNewChannel(this.inputAddChannel);
      this.closeAdd();
       // appel la fonction refresh                       //TODO
+      //this.refrechPage();
 
   }
+
+
 
 
   //******************  Afficher les details  channels / users ****************************//
 
 
+ filterParChannelUser(){
+    this.channels.filterUsersChannel();
+
+ }
 
 
 

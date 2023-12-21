@@ -14,26 +14,26 @@
         </div>
 
 
-      <div *ngFor="let item of this.channels.channelList">
-        <details open>
+      <div   *ngFor="let item of this.channels.channelsList">
+        <details open [class.active]= "item.id === selectedItem" (click)="setActiveClass(item.id)">
           <summary>
             {{item.nom|uppercase}}
           </summary>
-          <div *ngFor="let i of this.channels.channelList">
-              {{i.nom}}
+          <div *ngFor="let i of this.channels.listefiltrerChannelsUser">
+            <a *ngIf="i.utilisateur.id === item.id">
+              {{i.utilisateur.prenom + ' ' + i.utilisateur.nom |lowercase}}
+            </a>
 
           </div>
+<!--            <div *ngFor="let i of this.users.usersList">-->
+<!--              {{i.prenom + ' ' + i.nom |lowercase}}-->
+
+<!--          </div>-->
         </details>
-
-
 
       </div>
 
-
-
-
-
-
+<!--      <button (click)="filterParChannelUser()"> filter </button>-->
 
 
 
