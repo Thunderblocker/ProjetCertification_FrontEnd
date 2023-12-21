@@ -14,15 +14,15 @@
         </div>
 
 
-      <div   *ngFor="let item of this.channels.channelsList">
+      <div   *ngFor="let item of this.channels.channelList">
         <details open [class.active]= "item.id === selectedItem" (click)="setActiveClass(item.id)">
           <summary>
             {{item.nom|uppercase}}
           </summary>
-          <div *ngFor="let i of this.channels.listefiltrerChannelsUser">
-            <a *ngIf="i.utilisateur.id === item.id">
-              {{i.utilisateur.prenom + ' ' + i.utilisateur.nom |lowercase}}
-            </a>
+          <div *ngFor="let i of this.channels.channelList">
+<!--            <a *ngIf="i.utilisateur.id === item.id">-->
+<!--              {{i.utilisateur.prenom + ' ' + i.utilisateur.nom |lowercase}}-->
+<!--            </a>-->
 
           </div>
 <!--            <div *ngFor="let i of this.users.usersList">-->
@@ -99,7 +99,7 @@
                stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
             </i>
-            <h4> Supprimer le canal </h4>
+             Supprimer le canal </h4>
 
       </div>
       <div class="modal-body">
@@ -137,7 +137,7 @@
                stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
           </svg>
             </i>
-            <h4> Ajouter un canal </h4>
+              Ajouter un canal </h4>
 
       </div>
       <div class="modal-body">

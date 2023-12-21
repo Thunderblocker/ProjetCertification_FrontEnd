@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import {Injectable} from "@angular/core";
-import {User} from "../model/User";
-import {ApiUsers} from "./api.users";
-import {Channel} from "../model/Channel";
-
-=======
 import { Injectable, OnInit } from "@angular/core";
 import { User } from "../model/User";
 import { FetcherService } from "./fetcher.service";
 import { Observable } from "rxjs";
->>>>>>> 870f68f8207917de9ffa9c42a7ebbee1376c3c53
+
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +19,7 @@ export class UsersService implements OnInit {
     this.loadCurrentUser(1); // Simulate login with user ID 1
   }
 
-  /* 
+  /*
       - SERVICE DATA  -------------------------------------------
       Following methods are used to load
       the users list and the current user
@@ -53,18 +46,14 @@ export class UsersService implements OnInit {
   }
 
 
-<<<<<<< HEAD
+
   //GET ALL USERS
   getTousUtilisateurs() {
-    return this.apiUsers.getAllUsers().subscribe((data:User[]) => {
-      this.usersList = data;
-    });
+    this.getAllUsers();
   }
 
 
-
-=======
-  /* 
+  /*
       - SERVICE CRUD  -------------------------------------------
   */
 
@@ -92,10 +81,10 @@ export class UsersService implements OnInit {
   deleteUser(id: number): Observable<User> {
     return this.fetcher.delete<User>('users', id);
   }
->>>>>>> 870f68f8207917de9ffa9c42a7ebbee1376c3c53
 
 
-  /* 
+
+  /*
     - LOGIN  -------------------------------------------
   */
   loginOLD(user: User): Observable<User> {

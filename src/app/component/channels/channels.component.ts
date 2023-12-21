@@ -8,6 +8,7 @@ import {AlertComponent} from "./alertError/alert.component";
 import {Message} from "../../model/message.model";
 import {UsersService} from "../../service/users.service";
 import {MessagesComponent} from "../messages/messages.component";
+import {MessagesService} from "../../service/messages.service";
 
 
 
@@ -19,15 +20,15 @@ import {MessagesComponent} from "../messages/messages.component";
   styleUrl: './channels.component.scss'
 })
 
-export class ChannelsComponent  implements OnInit{
+export class ChannelsComponent  implements OnInit {
 
 
-   // listeChannels!:Channel[];
+  listeChannels!: Channel[];
 
-  listeMessages!:Message[];
+  listeMessages!: Message[];
 
   @Input()
-  listeTousCanaux!:Channel[];
+  listeTousCanaux!: Channel[];
 
   idChannelActive = 0;
   displayStyleEdit = "none";
@@ -36,42 +37,39 @@ export class ChannelsComponent  implements OnInit{
   displayStyleAlertError = "none";
 
   //recuperer la valeur input modifier le canal
-  inputChannel:Channel={
+  inputChannel: Channel = {
     id: this.idChannelActive,
-    nom:"",
+    nom: "",
   }
   //Recuperer la valeur input ajouter un canal
-  inputAddChannel:Channel={
-    id:0,
-    nom:"",
+  inputAddChannel: Channel = {
+    id: 0,
+    nom: "",
   }
 
-  @Input() nomChannelActif!:string;
+  @Input() nomChannelActif!: string;
 
-<<<<<<< HEAD
-  constructor( public channels:ChannelsService, public users:UsersService ) {
 
-=======
-  constructor( public channels:ChannelsService,public messageList:MessagesService, public users:UsersService) {
-    this.listeChannels= this.channels.channelList;
+  constructor(public channels: ChannelsService, public messageList: MessagesService, public users: UsersService) {
+    this.listeChannels = this.channels.channelList;
     this.listeMessages = this.messageList.getAllMessages();
->>>>>>> 870f68f8207917de9ffa9c42a7ebbee1376c3c53
+
   }
 
   ngOnInit(): void {
-    this.listeTousCanaux = this.channels.listeTousCanaux;
+    this.listeTousCanaux = this.channels.channelList;
 
   }
 
 
   refrechPage() {
-     //this.router.navigate(["/home"]);
-     //this.router.navigateByUrl("/home");
-     window.location.reload();
+    //this.router.navigate(["/home"]);
+    //this.router.navigateByUrl("/home");
+    window.location.reload();
   }
 
   // Rafraîchir data
-  refrechData(){
+  refrechData() {
     // this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
     // this.router.navigate(['Your actualComponent']);
     // });
@@ -80,17 +78,18 @@ export class ChannelsComponent  implements OnInit{
 
   //Add class active element
   selectedItem = 0;
-  setActiveClass(id:number){
+
+  setActiveClass(id: number) {
     this.selectedItem = id;
     this.idChannelActive = id;
     this.refrechData();
     //filter channel par user
     this.filterParChannelUser()
-    this.channels.getAllChannelsRefresh();
+    this.channels.loadChannelsList();
 
-     // if(this.listeChannels.length !=0){
-     //   this.listeChannels.forEach((element) => console.log("canal = "+element));
-     // }
+    // if(this.listeChannels.length !=0){
+    //   this.listeChannels.forEach((element) => console.log("canal = "+element));
+    // }
   }
 
 
@@ -99,59 +98,64 @@ export class ChannelsComponent  implements OnInit{
     this.displayStyleEdit = "block";
 
   }
+
   closeEdit() {
     this.displayStyleEdit = "none";
 
   }
 
-  editChannelSubmit(){
-    let id =  this.idChannelActive;
+  editChannelSubmit() {
+    let id = this.idChannelActive;
     //initialiser id de channel selectionner
-    this.inputChannel={
+    this.inputChannel = {
       id: this.idChannelActive,
-      nom:this.inputChannel.nom,
+      nom: this.inputChannel.nom,
     }
-    if(id ===0) {
-       this.closeEdit();
-       this.displayStyleAlertError="block";
-    }else{
+    if (id === 0) {
+      this.closeEdit();
+      this.displayStyleAlertError = "block";
+    } else {
       this.channels.editChannel(this.inputChannel);
       this.closeEdit();
       // appel la fonction refresh                     //TODO
-     // this.refrechPage();
+      // this.refrechPage();
 
     }
   }
 
 
   //    DELETE CHANNEL //
-  deleteChannel(){
+  deleteChannel() {
     this.displayStyledelete = "block";
   }
+
   closeDelete() {
     this.displayStyledelete = "none";
   }
-  deleteChannelSubmit(){
+
+  deleteChannelSubmit() {
     let id = this.idChannelActive;
-    if(id ===0) {
-        this.closeDelete();
-        this.displayStyleAlertError="block";
-    }else{
+    if (id === 0) {
+      this.closeDelete();
+      this.displayStyleAlertError = "block";
+    } else {
       this.channels.deleteChannel(id);
       this.closeDelete();
       // appel la fonction refresh                       //TODO
-     // this.refrechPage();
+      // this.refrechPage();
     }
   }
 
-    //  ADD NEW  CHANNEL  //
+  //  ADD NEW  CHANNEL  //
 
-  addChannel(){
+  addChannel() {
     this.displayStyleAdd = "block";
   }
-  closeAdd(){
+
+  closeAdd() {
     this.displayStyleAdd = "none";
   }
+
   addChannelSubmit() {
     if (this.inputAddChannel.nom.trim() !== '') {
       this.inputAddChannel = {
@@ -161,40 +165,24 @@ export class ChannelsComponent  implements OnInit{
       this.channels.addNewChannel(this.inputAddChannel);
       this.closeAdd();
     }
-<<<<<<< HEAD
-    this.channels.addNewChannel(this.inputAddChannel);
-     this.closeAdd();
-      // appel la fonction refresh                       //TODO
-      //this.refrechPage();
+      this.channels.addNewChannel(this.inputAddChannel);
+    this.closeAdd();
+    // appel la fonction refresh                       //TODO
+    //this.refrechPage();
 
   }
-
-
 
 
   //******************  Afficher les details  channels / users ****************************//
 
 
- filterParChannelUser(){
-    this.channels.filterUsersChannel();
+  filterParChannelUser() {
+    this.channels.loadChannelsList() //filterUsersChannel();
 
- }
-
-
+  }
 
 
-
-
-
-
-
-
+  //******************  Afficher les details  channels / users ****************************//
 
 
 }
-=======
-  }
-  //******************  Afficher les details  channels / users ****************************//
-      
-  }
->>>>>>> 870f68f8207917de9ffa9c42a7ebbee1376c3c53
