@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Message } from '../model/message.model';
 import { FetcherService } from './fetcher.service';
+import { ChannelsService } from './channels.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,8 +11,17 @@ export class MessagesService {
   sortedMessagesList: Message[] = [];
   //currentUserID: number | undefined;
 
-  constructor(private fetcher: FetcherService) {
-    this.loadMessagesList();
+  constructor(private fetcher: FetcherService, private channel: ChannelsService) {
+    this.messagesFiltree();
+  }
+
+  messagesFiltree()
+  {
+    this.fetcher.getAll<Message>('messages').subscribe(messages => {
+      this.messagesList = messages;
+      console.log(messages)
+      this.sortedMessagesList = this.messagesList.filter((message)=>message.canal!.id == this.channel.currentChannel.id)
+    });
   }
 
   /* 
@@ -23,6 +33,7 @@ export class MessagesService {
   loadMessagesList() {
     this.fetcher.getAll<Message>('messages').subscribe(messages => {
       this.messagesList = messages;
+      console.log(messages)
     });
   }
   

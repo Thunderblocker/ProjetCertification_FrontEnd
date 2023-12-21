@@ -1,0 +1,22 @@
+<div *ngIf="registerError" class="error-message">incorrect</div>
+<div *ngIf="loggedIn" class="">connexion ok</div>
+
+<span>Register</span>
+<form [formGroup]="registerForm" (submit)="onSubmit()">
+  <label for="pseudo">pseudo:</label>
+  <input formControlName="pseudo" placeholder="pseudo" id="pseudo" required>
+
+  <label for="password">Password:</label>
+  <input formControlName="password" placeholder="password" type="password" id="password" required>
+
+  <label for="prenom">Prenom:</label>
+  <input formControlName="prenom" placeholder="prenom" id="prenom" required>
+
+
+  <label for="nom">Nom:</label>
+  <input formControlName="nom" placeholder="nom" id="nom" required>
+
+  <div>
+    <button type="submit">register</button>
+  </div>
+</form>

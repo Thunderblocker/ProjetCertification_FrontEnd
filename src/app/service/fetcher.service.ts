@@ -52,4 +52,13 @@ export class FetcherService {
     console.log(thing);
     return thing;
   }
+
+  // register
+  register(userCredentials: any): Observable<UserCredentials> {
+    const thing = this.http.post<UserCredentials>(`${this.apiUrl}register`, userCredentials);
+    console.log(thing);
+    return thing;
+  }
+  
+
 }
