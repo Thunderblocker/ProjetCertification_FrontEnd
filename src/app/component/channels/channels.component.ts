@@ -38,7 +38,6 @@ export class ChannelsComponent {
   }
 
 
-
   constructor( public channels:ChannelsService,public messageList:MessagesService, public users:UsersService) {
     this.listeChannels= this.channels.channelList;
     this.listeMessages = this.messageList.getAllMessages();
@@ -107,31 +106,16 @@ export class ChannelsComponent {
   closeAdd(){
     this.displayStyleAdd = "none";
   }
-  addChannelSubmit(){
-    this.inputAddChannel={
-      id:0,
-      nom:this.inputAddChannel.nom,
+  addChannelSubmit() {
+    if (this.inputAddChannel.nom.trim() !== '') {
+      this.inputAddChannel = {
+        id: 0,
+        nom: this.inputAddChannel.nom,
+      };
+      this.channels.addNewChannel(this.inputAddChannel);
+      this.closeAdd();
     }
-    this.channels.addNewChannel(this.inputAddChannel);
-     this.closeAdd();
-      // appel la fonction refresh                       //TODO
-
   }
-
-
   //******************  Afficher les details  channels / users ****************************//
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+      
+  }

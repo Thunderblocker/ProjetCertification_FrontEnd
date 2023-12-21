@@ -8,7 +8,7 @@ import { FetcherService } from './fetcher.service';
 export class MessagesService {
   messagesList: Message[] = [];
   sortedMessagesList: Message[] = [];
-  currentUserID: number | undefined;
+  //currentUserID: number | undefined;
 
   constructor(private fetcher: FetcherService) {
     this.loadMessagesList();
@@ -27,11 +27,11 @@ export class MessagesService {
   }
   
   // SET CURRENT USER ID
-  setCurrentUserID(id: number | undefined) {
+  /* setCurrentUserID(id: number | undefined) {
     if (id !== undefined) {
       this.currentUserID = id;
     }
-  }
+  } */
   
   /* 
     - SERVICE CRUD  -------------------------------------------
