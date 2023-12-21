@@ -1,10 +1,17 @@
-import { Channel } from "./Channel";
-import { User } from "./User";
+
+import {User} from "./User";
+import {Channel} from "./Channel";
+
+
 
 export interface Message{
     id: number;
     contenu: string;
+    idUtilisateur: number|any;
     utilisateur: User;
-    canal: Channel;
-    date: Date;
+    idCanal: number|any;
+    date?: Date|string;
+    canal?: Channel;
 }
+
+

@@ -1,8 +1,7 @@
 export interface User {
      id: number;
-     pseudo: string;
+     pseudo?: string;
      prenom:string;
      nom:string;
-     image:string;
-
+     image:string|any;
 }

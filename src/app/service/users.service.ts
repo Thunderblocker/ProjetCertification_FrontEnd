@@ -3,6 +3,7 @@ import { User } from "../model/User";
 import { FetcherService } from "./fetcher.service";
 import { Observable } from "rxjs";
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +19,7 @@ export class UsersService implements OnInit {
     this.loadCurrentUser(1); // Simulate login with user ID 1
   }
 
-  /* 
+  /*
       - SERVICE DATA  -------------------------------------------
       Following methods are used to load
       the users list and the current user
@@ -45,7 +46,14 @@ export class UsersService implements OnInit {
   }
 
 
-  /* 
+
+  //GET ALL USERS
+  getTousUtilisateurs() {
+    this.getAllUsers();
+  }
+
+
+  /*
       - SERVICE CRUD  -------------------------------------------
   */
 
@@ -75,7 +83,8 @@ export class UsersService implements OnInit {
   }
 
 
-  /* 
+
+  /*
     - LOGIN  -------------------------------------------
   */
   loginOLD(user: User): Observable<User> {
