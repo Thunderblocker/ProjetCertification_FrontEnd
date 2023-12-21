@@ -3,7 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MessagesService } from '../../service/messages.service';
 import { Message } from '../../model/message.model';
-import { ChannelsService } from '../../service/channelsService';
+import { ChannelsService } from '../../service/channels.service';
 import { Channel } from '../../model/Channel';
 import { UsersService } from '../../service/users.service';
 import { MessagesListComponent } from '../messages-list/messages-list.component';
@@ -34,12 +34,9 @@ export class MessagesComponent implements OnInit {
 
   ngOnInit(): void {
     this.channelService.loadChannelsList();
-    //this.channelService.loadFirstChannel();
     this.channelService.getChannel(1).subscribe((data: Channel) => {
       this.currentChannel = data;
-      //this.cdRef.detectChanges();
     });
-    /* this.currentChannel = this.channelService.getCurrentChannel(); */
   }
 
   // Ajouter un nouveau message

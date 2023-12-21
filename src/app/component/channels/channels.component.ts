@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {ChannelsService} from "../../service/channelsService";
+import {ChannelsService} from "../../service/channels.service";
 import {Channel} from "../../model/Channel";
 import {FormsModule} from "@angular/forms";
 import {AlertComponent} from "./alertError/alert.component";

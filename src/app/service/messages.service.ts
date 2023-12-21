@@ -12,15 +12,30 @@ export class MessagesService {
 
   constructor(private fetcher: FetcherService) {
     this.loadMessagesList();
-    console.log("Log from MessagesService constructor");
   }
+
+  /* 
+    - SERVICE DATA  -------------------------------------------
+    Following methods are used to load
+    the messages list from the server .
+  */
 
   loadMessagesList() {
     this.fetcher.getAll<Message>('messages').subscribe(messages => {
       this.messagesList = messages;
-      console.log("Log from MessagesService loadMessagesList - Done");
     });
   }
+  
+  // SET CURRENT USER ID
+  setCurrentUserID(id: number | undefined) {
+    if (id !== undefined) {
+      this.currentUserID = id;
+    }
+  }
+  
+  /* 
+    - SERVICE CRUD  -------------------------------------------
+  */
 
   // GET ALL MESSAGES
   getAllMessages(): Message[] {
@@ -32,10 +47,9 @@ export class MessagesService {
     return this.fetcher.post<Message>('messages', message);
   }
 
-  // SET CURRENT USER ID
-  setCurrentUserID(id: number | undefined) {
-    if (id !== undefined) {
-      this.currentUserID = id;
-    }
+  //DELETE MESSAGE
+  deleteMessage(id: number) {
+    return this.fetcher.delete<Message>('messages', id);
   }
+
 }
