@@ -5,11 +5,19 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
+
+/* 
+  FETCHER SERVICE 
+  This service is used to fetch data from the server.
+  It uses the HttpClient to fetch data and returns an Observable.
+  The service can be called by other services, and use generic types.
+  
+*/
+
 export class FetcherService {
   private apiUrl = 'http://localhost:8080/';
 
-  constructor(private http: HttpClient) { 
-    console.log("log from fetcher sercive constructor");
+  constructor(private http: HttpClient) {
   }
 
   //GET ALL ITEMS
