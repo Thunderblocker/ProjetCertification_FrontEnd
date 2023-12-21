@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
-import {ChannelsService} from "../../service/channelsService";
+import {ChannelsService} from "../../service/channels.service";
 import {Channel} from "../../model/Channel";
 import {FormsModule} from "@angular/forms";
 import {AlertComponent} from "./alertError/alert.component";
@@ -48,8 +48,14 @@ export class ChannelsComponent  implements OnInit{
 
   @Input() nomChannelActif!:string;
 
+<<<<<<< HEAD
   constructor( public channels:ChannelsService, public users:UsersService ) {
 
+=======
+  constructor( public channels:ChannelsService,public messageList:MessagesService, public users:UsersService) {
+    this.listeChannels= this.channels.channelList;
+    this.listeMessages = this.messageList.getAllMessages();
+>>>>>>> 870f68f8207917de9ffa9c42a7ebbee1376c3c53
   }
 
   ngOnInit(): void {
@@ -146,11 +152,16 @@ export class ChannelsComponent  implements OnInit{
   closeAdd(){
     this.displayStyleAdd = "none";
   }
-  addChannelSubmit(){
-    this.inputAddChannel={
-      id:0,
-      nom:this.inputAddChannel.nom,
+  addChannelSubmit() {
+    if (this.inputAddChannel.nom.trim() !== '') {
+      this.inputAddChannel = {
+        id: 0,
+        nom: this.inputAddChannel.nom,
+      };
+      this.channels.addNewChannel(this.inputAddChannel);
+      this.closeAdd();
     }
+<<<<<<< HEAD
     this.channels.addNewChannel(this.inputAddChannel);
      this.closeAdd();
       // appel la fonction refresh                       //TODO
@@ -181,3 +192,9 @@ export class ChannelsComponent  implements OnInit{
 
 
 }
+=======
+  }
+  //******************  Afficher les details  channels / users ****************************//
+      
+  }
+>>>>>>> 870f68f8207917de9ffa9c42a7ebbee1376c3c53

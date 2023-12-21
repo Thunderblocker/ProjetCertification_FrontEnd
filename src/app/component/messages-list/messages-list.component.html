@@ -1,10 +1,29 @@
 <div class="messages-list">
-    <div *ngFor="let message of this.messagesService.messagesList" class="card mb-2" [ngClass]="{'align-right': message.id !== currentUserID, 'align-left': message.id === currentUserID}" class="card mb-3">
+
+    <div *ngFor="let message of messagesService.messagesList" class="card mb-2">
+
+      <!-- OTHER USER -->
+      <div *ngIf="message.utilisateur.id !== currentUserID" class="align-left text-info-emphasis bg-info-subtle border border-info-subtle rounded-3">
         <span data-toggle="tooltip" data-placement="top" title="ID: {{message.id}}">
-            <p class="card-text m-3">{{message.contenu}}</p>
-            <p class="card-text m-3"><small class="text-muted">{{datePipe.transform(message.date, 'HH:mm dd-MM-yyyy')}}</small></p>
-            <span>{{message.idCanal}}</span>
-            <span>{{message.idUtilisateur}}</span>
-        </span>
+            <div class="card-body">
+                <span>{{message.utilisateur.pseudo}}</span><span><small class="text-muted"> {{message.utilisateur.prenom}} {{message.utilisateur.nom}}</small></span>
+                <p class="card-text m-3">{{message.contenu}}</p>
+                <p class="card-text m-3"><small class="text-muted">{{datePipe.transform(message.date, 'HH:mm dd-MM-yyyy')}}</small></p>
+            </div>
+          </span>
+      </div>
+
+      <!-- CURRENT USER -->
+      <div *ngIf="message.utilisateur.id === currentUserID" class="align-right text-primary-emphasis bg-primary-subtle border border-primary-subtle rounded-3">
+        <span data-toggle="tooltip" data-placement="top" title="ID: {{message.id}}">
+            <div class="card-body">
+                <span>Vous:</span>
+              <p class="card-text m-3">{{message.contenu}}</p>
+              <p class="card-text m-3"><small class="text-muted">{{datePipe.transform(message.date, 'HH:mm dd-MM-yyyy')}}</small></p>
+            </div>
+          </span>
+      </div>
+
     </div>
-</div>
+  </div>
+  

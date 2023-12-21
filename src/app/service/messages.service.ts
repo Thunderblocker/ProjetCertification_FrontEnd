@@ -6,37 +6,50 @@ import { FetcherService } from './fetcher.service';
   providedIn: 'root'
 })
 export class MessagesService {
-  messagesList!: Message[];
-  sortedMessagesList!: Message[];
-  currentUserID!: number;
+  messagesList: Message[] = [];
+  sortedMessagesList: Message[] = [];
+  //currentUserID: number | undefined;
 
-  constructor(private fetcher: FetcherService) { 
+  constructor(private fetcher: FetcherService) {
     this.loadMessagesList();
   }
+
+  /* 
+    - SERVICE DATA  -------------------------------------------
+    Following methods are used to load
+    the messages list from the server .
+  */
 
   loadMessagesList() {
     this.fetcher.getAll<Message>('messages').subscribe(messages => {
       this.messagesList = messages;
-
-      //this.sortedMessagesList = this.messagesList.sort((a, b) => a.date.getTime() - b.date.getTime());
     });
   }
+  
+  // SET CURRENT USER ID
+  /* setCurrentUserID(id: number | undefined) {
+    if (id !== undefined) {
+      this.currentUserID = id;
+    }
+  } */
+  
+  /* 
+    - SERVICE CRUD  -------------------------------------------
+  */
 
-  //
-  getAllMessages(): Message[]{
+  // GET ALL MESSAGES
+  getAllMessages(): Message[] {
     return this.messagesList;
   }
 
-  //POST MESSAGE
-  addNewMessage(message:Message){
+  // POST MESSAGE
+  addNewMessage(message: Message) {
     return this.fetcher.post<Message>('messages', message);
   }
 
-  //SET CURRENT USER ID
-  setCurrentUserID(id:number){
-    if(id!){
-      this.currentUserID = 1;
-    }
-    this.currentUserID = id;
+  //DELETE MESSAGE
+  deleteMessage(id: number) {
+    return this.fetcher.delete<Message>('messages', id);
   }
+
 }
