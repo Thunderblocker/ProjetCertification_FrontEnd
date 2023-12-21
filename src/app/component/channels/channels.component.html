@@ -15,20 +15,10 @@
 
 
       <div   *ngFor="let item of this.channels.channelList">
-        <details open [class.active]= "item.id === selectedItem" (click)="setActiveClass(item.id)">
+        <details open [class.active]= "item.id === selectedItem" (click)="setActiveClass(item)">
           <summary>
             {{item.nom|uppercase}}
           </summary>
-          <div *ngFor="let i of this.channels.channelList">
-<!--            <a *ngIf="i.utilisateur.id === item.id">-->
-<!--              {{i.utilisateur.prenom + ' ' + i.utilisateur.nom |lowercase}}-->
-<!--            </a>-->
-
-          </div>
-<!--            <div *ngFor="let i of this.users.usersList">-->
-<!--              {{i.prenom + ' ' + i.nom |lowercase}}-->
-
-<!--          </div>-->
         </details>
 
       </div>
@@ -146,7 +136,7 @@
             <label for="nameAddCanal" class="m-3">
               Nom :
             </label>
-            <input id="nameAddCanal" type="text" name="nom"  [(ngModel)]="inputAddChannel.nom">
+            <input id="nameAddCanal" type="text" name="nom"  [(ngModel)]="inputAddChannel">
           </div>
         </form>
       </div>
@@ -192,7 +182,7 @@
             <label for="nameEdit" class="m-3">
               Nouveau nom :
             </label>
-            <input id="nameEdit" type="text" name="nom"  [(ngModel)]="inputChannel.nom">
+            <input id="nameEdit" type="text" name="nom"  [(ngModel)]="inputAddChannel">
           </div>
         </form>
       </div>

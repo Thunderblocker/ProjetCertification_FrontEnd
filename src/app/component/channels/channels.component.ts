@@ -21,71 +21,35 @@ import {MessagesService} from "../../service/messages.service";
 })
 
 export class ChannelsComponent  implements OnInit {
-
-
-  listeChannels!: Channel[];
-
-  listeMessages!: Message[];
-
-  @Input()
-  listeTousCanaux!: Channel[];
-
-  idChannelActive = 0;
   displayStyleEdit = "none";
   displayStyledelete = "none";
   displayStyleAdd = "none";
   displayStyleAlertError = "none";
-
-  //recuperer la valeur input modifier le canal
-  inputChannel: Channel = {
-    id: this.idChannelActive,
-    nom: "",
-  }
-  //Recuperer la valeur input ajouter un canal
-  inputAddChannel: Channel = {
-    id: 0,
-    nom: "",
-  }
-
-  @Input() nomChannelActif!: string;
-
+  inputAddChannel : string = ""
 
   constructor(public channels: ChannelsService, public messageList: MessagesService, public users: UsersService) {
-    this.listeChannels = this.channels.channelList;
-    this.listeMessages = this.messageList.getAllMessages();
-
+  console.log(this.channels.channelList)
   }
 
   ngOnInit(): void {
-    this.listeTousCanaux = this.channels.channelList;
-
   }
 
-
-  refrechPage() {
-    //this.router.navigate(["/home"]);
-    //this.router.navigateByUrl("/home");
-    window.location.reload();
-  }
-
-  // Rafraîchir data
-  refrechData() {
-    // this.router.navigateByUrl('/home', { skipLocationChange: true }).then(() => {
-    // this.router.navigate(['Your actualComponent']);
-    // });
-  }
 
 
   //Add class active element
   selectedItem = 0;
 
-  setActiveClass(id: number) {
-    this.selectedItem = id;
-    this.idChannelActive = id;
-    this.refrechData();
-    //filter channel par user
-    this.filterParChannelUser()
-    this.channels.loadChannelsList();
+  setActiveClass(canal: Channel) {
+    this.channels.currentChannel = canal;
+    this.messageList.messagesFiltree()
+
+
+    // this.selectedItem = id;
+    // this.idChannelActive = id;
+    // this.refrechData();
+    // //filter channel par user
+    // this.filterParChannelUser()
+    // this.channels.loadChannelsList();
 
     // if(this.listeChannels.length !=0){
     //   this.listeChannels.forEach((element) => console.log("canal = "+element));
@@ -105,17 +69,17 @@ export class ChannelsComponent  implements OnInit {
   }
 
   editChannelSubmit() {
-    let id = this.idChannelActive;
+    let id = this.channels.currentChannel.id
     //initialiser id de channel selectionner
-    this.inputChannel = {
-      id: this.idChannelActive,
-      nom: this.inputChannel.nom,
+    let inputChannel : Channel = {
+      id: this.channels.currentChannel.id,
+      nom: this.inputAddChannel
     }
     if (id === 0) {
       this.closeEdit();
       this.displayStyleAlertError = "block";
     } else {
-      this.channels.editChannel(this.inputChannel);
+      this.channels.editChannel(inputChannel).subscribe()
       this.closeEdit();
       // appel la fonction refresh                     //TODO
       // this.refrechPage();
@@ -134,12 +98,12 @@ export class ChannelsComponent  implements OnInit {
   }
 
   deleteChannelSubmit() {
-    let id = this.idChannelActive;
+    let id = this.channels.currentChannel.id
     if (id === 0) {
       this.closeDelete();
       this.displayStyleAlertError = "block";
     } else {
-      this.channels.deleteChannel(id);
+      this.channels.deleteChannel(id).subscribe()
       this.closeDelete();
       // appel la fonction refresh                       //TODO
       // this.refrechPage();
@@ -157,16 +121,14 @@ export class ChannelsComponent  implements OnInit {
   }
 
   addChannelSubmit() {
-    if (this.inputAddChannel.nom.trim() !== '') {
-      this.inputAddChannel = {
+   this.addChannel();
+      let inputAddChannel : Channel = {
         id: 0,
-        nom: this.inputAddChannel.nom,
+        nom: this.inputAddChannel
       };
-      this.channels.addNewChannel(this.inputAddChannel);
+      console.log(inputAddChannel)
+      this.channels.addNewChannel(inputAddChannel).subscribe((data)=> console.log(data))
       this.closeAdd();
-    }
-      this.channels.addNewChannel(this.inputAddChannel);
-    this.closeAdd();
     // appel la fonction refresh                       //TODO
     //this.refrechPage();
 

@@ -14,7 +14,7 @@
     <div>
       <h3>Liste des utilisateurs</h3>
       <app-users-list></app-users-list>
-      <div *ngFor="let user of this.userService.usersList">
+      <div *ngFor="let user of userService.usersList">
         <div class="card-boddy">
             <span>{{user.pseudo}}</span>
             <span>{{user.prenom}}</span>

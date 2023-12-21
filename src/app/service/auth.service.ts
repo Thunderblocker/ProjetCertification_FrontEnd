@@ -10,8 +10,22 @@ export class AuthService {
 
   constructor(private fetcher: FetcherService) { }
 
-  login(userCredentials: UserCredentials): Observable<boolean> {
+  login(userCredentials: UserCredentials ): Observable<boolean> {
     return this.fetcher.login(userCredentials)
+      .pipe(
+        map((data: any) => {
+          console.log('Login successful. Response:', data);
+          return true;
+        }),
+        catchError((error: any) => {
+          console.error('Error login', error);
+          return of(false);
+        })
+      );
+  }
+
+  register(userCredentials: any): Observable<boolean> {
+    return this.fetcher.register(userCredentials)
       .pipe(
         map((data: any) => {
           console.log('Login successful. Response:', data);

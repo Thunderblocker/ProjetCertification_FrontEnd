@@ -12,7 +12,9 @@ export class UsersService implements OnInit {
   usersList: User[] = [];
   currentUser: User | undefined;
 
-  constructor(private fetcher: FetcherService) { }
+  constructor(private fetcher: FetcherService) {
+    this.loadUsersList();
+   }
 
   ngOnInit(): void {
     this.loadUsersList();
