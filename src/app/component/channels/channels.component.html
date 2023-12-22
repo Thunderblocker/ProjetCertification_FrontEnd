@@ -20,6 +20,7 @@
 
 
 
+
 <!--      <div   *ngFor="let item of this.channels.channelList">-->
 <!--        <details open [class.active]= "item.id === selectedItem" (click)="setActiveClass(item.id)">-->
 <!--          <summary>-->
@@ -142,11 +143,13 @@
 
       </div>
       <div class="modal-body">
+
             <div class="row">
               <span>
                 <input class="clean-slide" id="name" type="text" placeholder="Veuillez saisir un nom ? " [(ngModel)]="inputAddChannel.nom"/><label for="name" >Nom </label>
               </span>
             </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btnModal"
@@ -187,12 +190,14 @@
           </i> Modifier le canal </h4>
       </div>
       <div class="modal-body">
+
         <div class="row">
               <span>
                 <input class="clean-slide" id="nom" type="text" placeholder="Veuillez saisir un nom ?"
                        [(ngModel)]="inputChannel.nom"/><label for="name">Nouveau </label>
               </span>
         </div>
+
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger btnModal"

@@ -5,3 +5,4 @@ export interface User {
      nom:string;
      image:string|any;
 }
+

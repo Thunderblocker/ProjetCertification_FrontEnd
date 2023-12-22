@@ -22,12 +22,15 @@ import {SearchChannelComponent} from "./search-channel/search-channel.component"
   styleUrl: './channels.component.scss'
 })
 
+
 export class ChannelsComponent implements OnInit {
 
 
   listeChannels!: Channel[];
   listeMessages!: Message[];
   idChannelActive = 0;
+
+
   displayStyleEdit = "none";
   displayStyledelete = "none";
   displayStyleAdd = "none";
@@ -48,17 +51,21 @@ export class ChannelsComponent implements OnInit {
   constructor(public channels: ChannelsService, public messageList: MessagesService, public users: UsersService,) {
     this.listeChannels = this.channels.channelList;
     this.listeMessages = this.messageList.getAllMessages();
+
   }
 
   ngOnInit(): void {
   }
 
+
   refrechPage() {
     window.location.reload();
   }
 
+
   //Add class active element
   selectedItem = 0;
+
 
   setActiveClass(id: number) {
     this.selectedItem = id;
@@ -68,6 +75,7 @@ export class ChannelsComponent implements OnInit {
 
     //Refresh data
     this.channels.loadChannelsList();
+
 
   }
 
@@ -81,17 +89,17 @@ export class ChannelsComponent implements OnInit {
   }
 
   editChannelSubmit() {
-    let id = this.idChannelActive;
+    let id = this.channels.currentChannel.id
     //initialiser id de channel selectionner
-    this.inputChannel = {
-      id: this.idChannelActive,
-      nom: this.inputChannel.nom,
+    let inputChannel : Channel = {
+      id: this.channels.currentChannel.id,
+      nom: this.inputAddChannel
     }
     if (id === 0) {
       this.closeEdit();
       this.displayStyleAlertError = "block";
     } else {
-      this.channels.editChannel(this.inputChannel);
+      this.channels.editChannel(inputChannel).subscribe()
       this.closeEdit();
       // appel la fonction refresh
       this.refrechPage();
@@ -110,12 +118,12 @@ export class ChannelsComponent implements OnInit {
   }
 
   deleteChannelSubmit() {
-    let id = this.idChannelActive;
+    let id = this.channels.currentChannel.id
     if (id === 0) {
       this.closeDelete();
       this.displayStyleAlertError = "block";
     } else {
-      this.channels.deleteChannel(id);
+      this.channels.deleteChannel(id).subscribe()
       this.closeDelete();
       // appel la fonction refresh
       this.refrechPage();
@@ -133,6 +141,7 @@ export class ChannelsComponent implements OnInit {
   }
 
   addChannelSubmit() {
+
     // if (this.inputAddChannel.nom.trim() !== '') {
     //   this.inputAddChannel = {
     //     id: 0,
@@ -141,6 +150,7 @@ export class ChannelsComponent implements OnInit {
     //   this.channels.addNewChannel(this.inputAddChannel);
     //   this.closeAdd();
     // }
+
 
     this.channels.addNewChannel(this.inputAddChannel);
     this.closeAdd();

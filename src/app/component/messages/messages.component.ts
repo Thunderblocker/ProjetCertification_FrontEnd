@@ -41,7 +41,6 @@ export class MessagesComponent implements OnInit{
   };
 
   newMessage: Message = {
-    idCanal: undefined, idUtilisateur: undefined,
     id: 0,
     contenu: '',
     utilisateur: { id:100, pseudo:'defaut', prenom:'defaut', nom:'defaut', image:''},
@@ -64,6 +63,8 @@ export class MessagesComponent implements OnInit{
   ngOnInit(): void {
     //this.channelService.getCurrentChannel();
       this.currentChannel = this.channelService.getCurrentChannel();
+      this.messagesService.messagesFiltree()
+
   // ngOnInit(): void {
   //   this.channelService.loadChannelsList();
   //   this.channelService.getChannel(1).subscribe((data: Channel) => {
@@ -78,10 +79,11 @@ export class MessagesComponent implements OnInit{
      // this.newMessage.canal.id = this.channelService.getCurrentChannel()?.id??1;
 
       this.newMessage.utilisateur.id = this.userService.getCurrentUserId()??1;
-
+      this.newMessage.canal = this.channelService.currentChannel;
       this.messagesService.addNewMessage(this.newMessage).subscribe(() => {
         this.newMessage.contenu = '';
-        this.messagesService.loadMessagesList();
+        this.messagesService.messagesFiltree()
+
       });
     }
   }

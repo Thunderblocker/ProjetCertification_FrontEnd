@@ -1,6 +1,6 @@
 <div class="messages-list">
 
-    <div *ngFor="let message of messagesService.messagesList" class="card mb-2">
+    <div *ngFor="let message of messagesService.sortedMessagesList" class="card mb-2">
 
       <!-- OTHER USER -->
       <div *ngIf="message.utilisateur.id !== currentUserID" class="align-left text-info-emphasis bg-info-subtle border border-info-subtle rounded-3">
