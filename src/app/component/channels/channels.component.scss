@@ -2,33 +2,29 @@
   background-color: #62add6;
   color: #f3f3f3;
 }
-
+.active{
+  color: #f3f3f3!important;
+}
 a:hover {
   background-color: #A1CCD1;
 }
 .btnChannel{
   background-color: #62add6;
-  width: 110px !important;
+  width: 90px !important;
+}
+.btn-group{
+
 }
 .btnChannel:hover{
   background-color: #FFC600;
 }
 
-//button {
-//  font-family: Arial, Helvetica;
-//  font-size: 16px;
-//  padding: 10px;
-//  background: #62add6;
-//  color: #000000;
-//  display: inline;
-//  border: 0;
-//  text-decoration: none;
-//  line-height: 17px;
-//}
+.btnModal{
+  width: 100px !important;
 
+}
 
 button{
-
   cursor:pointer;
   margin-top:20px;
   float:right;
@@ -70,12 +66,6 @@ button{
 	font-size: 16px;
 }
 
-//body {
-//	font-family: "Inter", sans-serif;
-//	line-height: 1.5;
-//	min-height: 100vh;
-//	font-size: 1.25rem;
-//}
 
 *:focus {
 	outline: none;
@@ -169,6 +159,102 @@ code {
 	font-weight: 600;
 }
 
+
+
+/******** CSS INPUT  *******/
+
+.row {
+  background:#FFFFFF;
+  text-align: center;
+
+  &:first-child {
+    padding: 10px 50px;
+  }
+  span {
+    position: relative;
+    display: inline-block;
+    margin: 3px 1px;
+  }
+}
+
+
+.clean-slide {
+  position: relative;
+  display: inline-block;
+  width: 215px;
+  padding: 10px 0 10px 15px;
+  font-family: "Open Sans", sans;
+  font-weight: 400;
+  color: #2FA4FF;
+  background:#2FA4FF;
+  border: 0;
+  border-radius: 3px;
+  outline: 0;
+  text-indent: 60px; // Arbitrary.
+  transition: all .3s ease-in-out;
+
+  &::-webkit-input-placeholder {
+    color: #f3f3f3;
+    text-indent: 0;
+    font-weight: 300;
+  }
+
+  + label {
+    display: inline-block;
+    position: absolute;
+    transform: translateX(0);
+    top: 0;
+    left: 0;
+    bottom: 0;
+    padding: 13px 15px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #000000;
+    text-align: left;
+    text-shadow: 0 1px 0 rgba(255,255,255,.4);
+    transition: all .3s ease-in-out, color .3s ease-out;
+    border-top-left-radius: 3px;
+    border-bottom-left-radius: 3px;
+    overflow: hidden;
+
+    &:after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 100%;
+      bottom: 0;
+      width: 100%;
+      background: #2FA4FF;
+      z-index: -1;
+      transform: translate(0);
+      transition: all .3s ease-in-out;
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+  }
+}
+.clean-slide:focus,
+.clean-slide:active {
+  color: #2FA4FF;
+  text-indent: 0;
+  background: #fff;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+
+  &::-webkit-input-placeholder {
+    color: #A1CCD1;
+  }
+  + label {
+    color: #000000;
+    text-shadow: 0 1px 0 rgba(19,74,70,.4);
+    transform: translateX(-100%);
+
+    &:after {
+      transform: translate(100%);
+    }
+  }
+}
 
 
 

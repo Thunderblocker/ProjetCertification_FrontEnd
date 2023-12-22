@@ -75,7 +75,7 @@ export class MessagesComponent implements OnInit{
   // Ajouter un nouveau message
   addMessageSubmit() {
     if (this.newMessage.contenu.trim() !== '') {
-     // this.newMessage.canal.id = this.channelService.getCurrentChannel()?.id??1;       // revoir ca
+     // this.newMessage.canal.id = this.channelService.getCurrentChannel()?.id??1;
 
       this.newMessage.utilisateur.id = this.userService.getCurrentUserId()??1;
 
