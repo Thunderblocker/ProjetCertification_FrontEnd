@@ -12,7 +12,7 @@ import {CloneChannel} from "../model/CloneChannel";
 @Injectable({
   providedIn: 'root'
 })
-export class ChannelsService {
+export class ChannelsService1 {
 
   channelsList!: Channel[];
   channelListClone!: CloneChannel[];
@@ -71,9 +71,9 @@ export class ChannelsService {
     return this.apiChannel.deleteChannel(id);
   }
   //POST CHANNEL
-  addNewChannel(channel:Channel){
-    return this.apiChannel.postNewChannel(channel);
-  }
+  // addNewChannel(channel:Channel){
+  //   return this.apiChannel.postNewChannel(channel);
+  // }
 
   // GET CURRENT CHANNEL
   getCurrentChannel(): Channel {
