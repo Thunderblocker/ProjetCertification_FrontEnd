@@ -1,15 +1,31 @@
 <div *ngIf="loginError" class="error-message">incorrect</div>
 <div *ngIf="loggedIn" class="">connexion ok</div>
 
-<span>Login</span>
-<form [formGroup]="loginForm" (submit)="onSubmit()">
-  <label for="username">Username:</label>
-  <input formControlName="username" placeholder="username" id="username" required>
+<!--<span>Login</span>-->
+<!--<form [formGroup]="loginForm" (submit)="onSubmit()">-->
+<!--  <label for="username">Username:</label>-->
+<!--  <input formControlName="username" placeholder="username" id="username" required>-->
 
-  <label for="password">Password:</label>
-  <input formControlName="password" placeholder="password" type="password" id="password" required>
+<!--  <label for="password">Password:</label>-->
+<!--  <input formControlName="password" placeholder="password" type="password" id="password" required>-->
 
-  <div>
-    <button type="submit">Login</button>
-  </div>
-</form>
+<!--  <div>-->
+<!--    <button type="submit">Login</button>-->
+<!--  </div>-->
+<!--</form>-->
+
+<div class="card-header mt-xxl-5">
+  <form class="survey-form" [formGroup]="loginForm" (submit)="onSubmit()">
+    <h2>Connexion </h2>
+    <div class="form-group">
+      <label for="username">Utilisateur :</label>
+      <input type="text"formControlName="username" placeholder="username" id="username" required>
+    </div>
+    <div class="form-group">
+      <label for="password">Mot de passe:</label>
+      <input formControlName="password" placeholder="password" type="password" id="password"required>
+    </div>
+    <button type="submit">Connexion</button>
+  </form>
+</div>
+

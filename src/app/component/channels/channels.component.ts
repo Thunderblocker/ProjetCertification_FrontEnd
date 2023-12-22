@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CommonModule} from "@angular/common";
 import {ChannelsService} from "../../service/channels.service";
 import {Channel} from "../../model/Channel";
@@ -10,62 +10,82 @@ import {UsersService} from "../../service/users.service";
 import {MessagesComponent} from "../messages/messages.component";
 import {MessagesService} from "../../service/messages.service";
 
+import {SearchChannelComponent} from "./search-channel/search-channel.component";
+
 
 
 @Component({
   selector: 'app-channels',
   standalone: true,
-  imports: [CommonModule, FormsModule, AlertComponent,MessagesComponent],
+  imports: [CommonModule, FormsModule, AlertComponent, MessagesComponent, SearchChannelComponent],
   templateUrl: './channels.component.html',
   styleUrl: './channels.component.scss'
 })
 
-export class ChannelsComponent  implements OnInit {
+
+export class ChannelsComponent implements OnInit {
+
+
+  listeChannels!: Channel[];
+  listeMessages!: Message[];
+  idChannelActive = 0;
+
+
   displayStyleEdit = "none";
   displayStyledelete = "none";
   displayStyleAdd = "none";
   displayStyleAlertError = "none";
-  inputAddChannel : string = ""
 
-  constructor(public channels: ChannelsService, public messageList: MessagesService, public users: UsersService) {
-  console.log(this.channels.channelList)
+  //recuperer la valeur input modifier le canal
+  inputChannel: Channel = {
+    id: this.idChannelActive,
+    nom: "",
+  }
+  //Recuperer la valeur input ajouter un canal
+  inputAddChannel: Channel = {
+    id: 0,
+    nom: "",
+  }
+
+
+  constructor(public channels: ChannelsService, public messageList: MessagesService, public users: UsersService,) {
+    this.listeChannels = this.channels.channelList;
+    this.listeMessages = this.messageList.getAllMessages();
+
   }
 
   ngOnInit(): void {
   }
 
 
+  refrechPage() {
+    window.location.reload();
+  }
+
 
   //Add class active element
   selectedItem = 0;
 
-  setActiveClass(canal: Channel) {
-    this.channels.currentChannel = canal;
-    this.messageList.messagesFiltree()
+
+  setActiveClass(id: number) {
+    this.selectedItem = id;
+    this.idChannelActive = id;
+    //filter channel par user
+    this.filterParChannelUser();
+
+    //Refresh data
+    this.channels.loadChannelsList();
 
 
-    // this.selectedItem = id;
-    // this.idChannelActive = id;
-    // this.refrechData();
-    // //filter channel par user
-    // this.filterParChannelUser()
-    // this.channels.loadChannelsList();
-
-    // if(this.listeChannels.length !=0){
-    //   this.listeChannels.forEach((element) => console.log("canal = "+element));
-    // }
   }
-
 
   //    EDIT CHANNEL  //
   editChannel() {
     this.displayStyleEdit = "block";
-
   }
 
   closeEdit() {
     this.displayStyleEdit = "none";
-
   }
 
   editChannelSubmit() {
@@ -81,12 +101,12 @@ export class ChannelsComponent  implements OnInit {
     } else {
       this.channels.editChannel(inputChannel).subscribe()
       this.closeEdit();
-      // appel la fonction refresh                     //TODO
-      // this.refrechPage();
+      // appel la fonction refresh
+      this.refrechPage();
+      this.channels.loadChannelsList();
 
     }
   }
-
 
   //    DELETE CHANNEL //
   deleteChannel() {
@@ -105,46 +125,44 @@ export class ChannelsComponent  implements OnInit {
     } else {
       this.channels.deleteChannel(id).subscribe()
       this.closeDelete();
-      // appel la fonction refresh                       //TODO
-      // this.refrechPage();
+      // appel la fonction refresh
+      this.refrechPage();
+      this.channels.loadChannelsList();
     }
   }
 
   //  ADD NEW  CHANNEL  //
-
   addChannel() {
+    console.log("*** addChannel ***");
     this.displayStyleAdd = "block";
   }
-
   closeAdd() {
     this.displayStyleAdd = "none";
   }
 
   addChannelSubmit() {
-   this.addChannel();
-      let inputAddChannel : Channel = {
-        id: 0,
-        nom: this.inputAddChannel
-      };
-      console.log(inputAddChannel)
-      this.channels.addNewChannel(inputAddChannel).subscribe((data)=> console.log(data))
-      this.closeAdd();
-    // appel la fonction refresh                       //TODO
-    //this.refrechPage();
 
+    // if (this.inputAddChannel.nom.trim() !== '') {
+    //   this.inputAddChannel = {
+    //     id: 0,
+    //     nom: this.inputAddChannel.nom,
+    //   };
+    //   this.channels.addNewChannel(this.inputAddChannel);
+    //   this.closeAdd();
+    // }
+
+
+    this.channels.addNewChannel(this.inputAddChannel);
+    this.closeAdd();
+    // appel la fonction refresh
+    this.refrechPage();
+    this.channels.loadChannelsList();
   }
-
-
-  //******************  Afficher les details  channels / users ****************************//
 
 
   filterParChannelUser() {
-    this.channels.loadChannelsList() //filterUsersChannel();
-
+    this.channels.loadChannelsList(); //filterUsersChannel();
   }
-
-
-  //******************  Afficher les details  channels / users ****************************//
 
 
 }

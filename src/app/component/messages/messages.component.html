@@ -11,7 +11,13 @@
             </svg>
           </i>
 
-        {{this.channelService?.currentChannel?.nom}}
+          <ng-container *ngIf="currentChannel; else loading">
+<!--            {{ currentChannel?.nom }}-->
+          </ng-container>
+          <ng-template #loading>Loading...</ng-template>
+
+<!--          {{this.channelService?.currentChannel?.nom}}-->
+
         </h5>
 
 
